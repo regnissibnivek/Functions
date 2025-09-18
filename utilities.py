@@ -203,3 +203,60 @@ def is_prime(n: int) -> bool:
             return False
         i += 6
     return True
+
+
+
+def gcd(a: int, b: int) -> int:
+    """Compute the greatest common divisor (GCD) of two non-negative integers using Euclid's algorithm.
+
+    Parameters
+    ----------
+    a : int
+        First non-negative integer.
+    b : int
+        Second non-negative integer.
+
+    Returns
+    -------
+    int
+        The greatest common divisor of ``a`` and ``b``.
+
+    Raises
+    ------
+    ValueError
+        If either ``a`` or ``b`` is negative.
+    """
+    if a < 0 or b < 0:
+        raise ValueError("Inputs must be non-negative")
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+
+def lcm(a: int, b: int) -> int:
+    """Compute the least common multiple (LCM) of two non-negative integers.
+
+    The LCM is calculated using the relationship ``lcm(a, b) = abs(a * b) // gcd(a, b)``.
+
+    Parameters
+    ----------
+    a : int
+        First non-negative integer.
+    b : int
+        Second non-negative integer.
+
+    Returns
+    -------
+    int
+        The least common multiple of ``a`` and ``b``.
+
+    Raises
+    ------
+    ValueError
+        If either ``a`` or ``b`` is negative.
+    """
+    if a < 0 or b < 0:
+        raise ValueError("Inputs must be non-negative")
+    if a == 0 or b == 0:
+        return 0
+    return abs(a * b) // gcd(a, b)
