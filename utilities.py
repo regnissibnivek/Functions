@@ -260,3 +260,84 @@ def lcm(a: int, b: int) -> int:
     if a == 0 or b == 0:
         return 0
     return abs(a * b) // gcd(a, b)
+
+
+# Additional statistical and string utility functions
+
+def mean(numbers: list[float]) -> float:
+    """Compute the arithmetic mean of a list of numbers.
+
+    Parameters
+    ----------
+    numbers : list of float
+        Sequence of numerical values.
+
+    Returns
+    -------
+    float
+        The arithmetic mean of the input numbers.
+
+    Raises
+    ------
+    ValueError
+        If 'numbers' is empty.
+    """
+    if not numbers:
+        raise ValueError("The numbers list must not be empty")
+    return sum(numbers) / len(numbers)
+
+
+def median(numbers: list[float]) -> float:
+    """Compute the median of a list of numbers.
+
+    The input list is not modified. The median is the middle value when the list
+    is sorted. For even-length lists, the median is the average of the two
+    middle values.
+
+    Parameters
+    ----------
+    numbers : list of float
+        Sequence of numerical values.
+
+    Returns
+    -------
+    float
+        The median of the input numbers.
+
+    Raises
+    ------
+    ValueError
+        If 'numbers' is empty.
+    """
+    n = len(numbers)
+    if n == 0:
+        raise ValueError("The numbers list must not be empty")
+    sorted_nums = sorted(numbers)
+    mid = n // 2
+    if n % 2 == 1:
+        return float(sorted_nums[mid])
+    else:
+        return (sorted_nums[mid - 1] + sorted_nums[mid]) / 2.0
+
+
+def is_anagram(s1: str, s2: str) -> bool:
+    """Check whether two strings are anagrams of each other.
+
+    The comparison ignores case, spaces, and punctuation.
+
+    Parameters
+    ----------
+    s1 : str
+        First string.
+    s2 : str
+        Second string.
+
+    Returns
+    -------
+    bool
+        True if the strings are anagrams, False otherwise.
+    """
+    translator = str.maketrans('', '', string.punctuation + ' ')
+    clean1 = s1.translate(translator).lower()
+    clean2 = s2.translate(translator).lower()
+    return sorted(clean1) == sorted(clean2)
